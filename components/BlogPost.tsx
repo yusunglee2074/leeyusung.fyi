@@ -1,17 +1,25 @@
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
+
 interface BlogPostProps {
   post: {
     title: string;
     content: string;
-    // Add other fields as needed (e.g., author, date)
+    created_at: string;
   };
 }
 
 const BlogPost = ({ post }: BlogPostProps) => {
   return (
-    <article className="bg-white p-6 rounded-lg shadow-md mb-4">
-      <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
-      <div dangerouslySetInnerHTML={{ __html: post.content }} />{" "}
-      {/* Sanitize content on the server */}
+    <article className="container bg-white p-2 rounded-lg mb-4 hover:bg-gray-200 cursor-pointer">
+      <div className="flex justify-between">
+        <h2 className="text-xl font-bold font-bold mb-2">{post.title}</h2>
+        <span className="text-sm text-right">
+          {dayjs(post.created_at).fromNow()}
+        </span>
+      </div>
+      <p>{post.content.slice(0, 30)}</p>
     </article>
   );
 };

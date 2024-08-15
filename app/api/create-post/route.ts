@@ -1,15 +1,12 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import type { Database } from "../../../lib/types";
+import { createClient } from "@/lib/supabase-server";
 
 export async function POST(request: Request) {
-  const supabase = createRouteHandlerClient<Database>({ cookies });
+  const supabase = createClient<Database>();
   const { title, content } = await request.json();
 
-  const { data, error } = await supabase
-    .from("posts")
-    .insert({ title, content });
+  const { error } = await supabase.from("posts").insert({ title, content });
 
   if (error) {
     console.error(error);

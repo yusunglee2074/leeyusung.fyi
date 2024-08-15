@@ -9,7 +9,7 @@ const orbit = Orbit({
 });
 
 export const metadata: Metadata = {
-  title: "유성이",
+  title: "이유성 | want to be comedian",
   description: "My favorite thing to do is make other people laugh.",
 };
 
