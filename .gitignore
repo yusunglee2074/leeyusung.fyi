@@ -34,3 +34,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# Created by https://www.toptal.com/developers/gitignore/api/next.js,node.js,typescript
+# Edit at https://www.toptal.com/developers/gitignore?templates=next.js,node.js,typescript
+
+#!! ERROR: next.js is undefined. Use list command to see defined gitignore types !!#
+
+#!! ERROR: node.js is undefined. Use list command to see defined gitignore types !!#
+
+#!! ERROR: typescript is undefined. Use list command to see defined gitignore types !!#
+
+# End of https://www.toptal.com/developers/gitignore/api/next.js,node.js,typescript
