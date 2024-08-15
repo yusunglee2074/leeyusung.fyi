@@ -1,33 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { AuthTokenResponse } from "@supabase/supabase-js";
+
+interface SupabaseAuthError {
+  message: string;
+}
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      const { error }: AuthTokenResponse =
+        await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
 
       if (error) {
         throw error;
       }
 
-      // Redirect to the admin dashboard after successful login
       router.push("/admin");
     } catch (error) {
-      setError(error.message);
+      // Type assertion here, assuming error has a 'message' property
+      setError((error as SupabaseAuthError).message);
     }
   };
 
